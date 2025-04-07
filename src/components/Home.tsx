@@ -69,7 +69,7 @@ export default function Home() {
 
   return (
     <>
-      <Container maxWidth="sm" sx={{ mt: 4, pb: 12 }}>
+      <Container maxWidth="sm" sx={{ mt: 1, pb: 12 }}>
         <PersonForm onAdd={addPerson} />
         <PersonList people={people} onRemove={removePerson} />
         <SplitResult results={results} />

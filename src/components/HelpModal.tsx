@@ -14,12 +14,7 @@ export default function HelpModal() {
 
   return (
     <>
-      <IconButton
-        color="inherit"
-        onClick={() => setOpen(true)}
-        sx={{ position: "absolute", top: 10, right: 10 }}
-        aria-label="Ayuda"
-      >
+      <IconButton onClick={() => setOpen(true)} aria-label="Ayuda">
         <HelpOutlineIcon />
       </IconButton>
 
