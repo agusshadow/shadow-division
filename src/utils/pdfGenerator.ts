@@ -2,6 +2,14 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { Person, Result } from "../entities/entities";
 
+declare module "jspdf" {
+  interface jsPDF {
+    lastAutoTable?: {
+      finalY: number;
+    };
+  }
+}
+
 export const generatePDF = (people: Person[], results: Result[]) => {
   const doc = new jsPDF();
 
@@ -16,7 +24,7 @@ export const generatePDF = (people: Person[], results: Result[]) => {
 
   if (results.length > 0) {
     autoTable(doc, {
-      startY: doc.lastAutoTable.finalY + 10,
+      startY: doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 10 : 40,
       head: [["Quién paga", "A quién", "Monto"]],
       body: results.map((r) => [r.from, r.to, `$${r.amount.toFixed(2)}`]),
     });
