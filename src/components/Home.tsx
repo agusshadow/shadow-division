@@ -4,6 +4,7 @@ import { Button, Container, Stack, Typography } from "@mui/material";
 import PersonForm from "./PersonForm";
 import PersonList from "./PersonList";
 import SplitResult from "./SplitResult";
+import { generatePDF } from "../utils/pdfGenerator";
 
 export default function Home() {
   const [people, setPeople] = useState<Person[]>([]);
@@ -82,6 +83,14 @@ export default function Home() {
           disabled={people.length < 2}
         >
           Calcular
+        </Button>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => generatePDF(people, results)}
+          disabled={results.length === 0}
+        >
+          Descargar PDF
         </Button>
         <Button
           variant="outlined"
