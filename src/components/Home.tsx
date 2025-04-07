@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Person, Result } from "../entities/entities";
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack } from "@mui/material";
 import PersonForm from "./PersonForm";
 import PersonList from "./PersonList";
 import SplitResult from "./SplitResult";
@@ -68,44 +68,60 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Divisor de gastos
-      </Typography>
+    <>
+      <Container maxWidth="sm" sx={{ mt: 4, pb: 12 }}>
+        <PersonForm onAdd={addPerson} />
+        <PersonList people={people} onRemove={removePerson} />
+        <SplitResult results={results} />
+      </Container>
 
-      <PersonForm onAdd={addPerson} />
-      <PersonList people={people} onRemove={removePerson} />
-
-      <Stack spacing={2} direction="row" mt={2}>
+      <Stack
+        direction="column"
+        spacing={2}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          bgcolor: "#fff",
+          p: 2,
+          zIndex: 1000,
+          boxShadow: "0 -2px 8px rgba(0,0,0,0.1)",
+        }}
+      >
         <Button
           variant="contained"
+          fullWidth
           onClick={calculate}
           disabled={people.length < 2}
         >
           Calcular
         </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => generatePDF(people, results)}
-          disabled={results.length === 0}
-        >
-          Descargar PDF
-        </Button>
-        <Button
-          variant="outlined"
-          color="error"
-          onClick={() => {
-            setPeople([]);
-            setResults([]);
-            localStorage.removeItem("people");
-          }}
-        >
-          Limpiar todo
-        </Button>
-      </Stack>
 
-      <SplitResult results={results} />
-    </Container>
+        <Stack direction="row" spacing={2}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            onClick={() => generatePDF(people, results)}
+            disabled={results.length === 0}
+          >
+            Descargar PDF
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            fullWidth
+            onClick={() => {
+              setPeople([]);
+              setResults([]);
+              localStorage.removeItem("people");
+            }}
+          >
+            Limpiar todo
+          </Button>
+        </Stack>
+      </Stack>
+    </>
   );
 }

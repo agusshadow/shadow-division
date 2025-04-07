@@ -1,4 +1,10 @@
-import { List, ListItem, ListItemText, IconButton } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 type Person = { name: string; amount: number };
@@ -22,7 +28,11 @@ export default function PersonList({ people, onRemove }: Props) {
         >
           <ListItemText
             primary={person.name}
-            secondary={`$${person.amount.toFixed(2)}`}
+            secondary={
+              <Typography variant="body2" sx={{ color: "green" }}>
+                ${person.amount.toFixed(2)}
+              </Typography>
+            }
           />
         </ListItem>
       ))}
