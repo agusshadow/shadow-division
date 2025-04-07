@@ -16,7 +16,7 @@ export default defineConfig({
       manifest: {
         name: "Shadow Division",
         description: "App para dividir gastos entre personas",
-        theme_color: "#1976d2",
+        theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
         icons: [
